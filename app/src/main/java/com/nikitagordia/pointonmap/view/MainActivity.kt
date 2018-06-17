@@ -11,11 +11,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.nikitagordia.pointonmap.R
 import com.nikitagordia.pointonmap.model.data.Point
 import com.nikitagordia.pointonmap.presenter.MainPresenter
 import com.nikitagordia.pointonmap.presenter.Presenter
+import com.nikitagordia.pointonmap.view.detailsfragment.DetailsFragment
 
 class MainActivity : AppCompatActivity(), ViewInterface {
 
@@ -37,6 +39,11 @@ class MainActivity : AppCompatActivity(), ViewInterface {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync( {
             map = it
+            map?.setOnMarkerClickListener { marker : Marker ->
+                val point = points?.find { it.title == marker.title } ?: return@setOnMarkerClickListener false
+                DetailsFragment.getInstance(point).show(supportFragmentManager, "mytg")
+                return@setOnMarkerClickListener true
+            }
             if (points != null) update(points!!)
         } )
 
@@ -54,6 +61,7 @@ class MainActivity : AppCompatActivity(), ViewInterface {
     }
 
     private fun update(points: List<Point>) {
+        this.points = points
         map?.clear()
         val bounds = LatLngBounds.builder()
         points.forEach {

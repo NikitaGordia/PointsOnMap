@@ -4,4 +4,6 @@
 
     <string name="error">ERROR</string>
     <string name="try_again">Try again</string>
+
+    <string name="empty">Empty(</string>
 </resources>
