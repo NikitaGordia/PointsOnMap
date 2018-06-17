@@ -39,10 +39,12 @@ class DetailsFragment : BottomSheetDialogFragment() {
 
     companion object {
 
-        private val EXTRA_POINT_LAT = "com.nikitagordia.pointonmap.view.detailsfragment.point.lat"
-        private val EXTRA_POINT_LON = "com.nikitagordia.pointonmap.view.detailsfragment.point.lon"
-        private val EXTRA_POINT_TITLE = "com.nikitagordia.pointonmap.view.detailsfragment.point.title"
-        private val EXTRA_POINT_DESCRIPTION = "com.nikitagordia.pointonmap.view.detailsfragment.point.description"
+        const val TAG = "com.nikitagordia.pointonmap.view.detailsfragment.TAG"
+
+        private const val EXTRA_POINT_LAT = "com.nikitagordia.pointonmap.view.detailsfragment.point.lat"
+        private const val EXTRA_POINT_LON = "com.nikitagordia.pointonmap.view.detailsfragment.point.lon"
+        private const val EXTRA_POINT_TITLE = "com.nikitagordia.pointonmap.view.detailsfragment.point.title"
+        private const val EXTRA_POINT_DESCRIPTION = "com.nikitagordia.pointonmap.view.detailsfragment.point.description"
 
         fun getInstance(point: Point): DetailsFragment {
             val result = DetailsFragment()

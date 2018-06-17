@@ -22,10 +22,9 @@ import com.nikitagordia.pointonmap.view.detailsfragment.DetailsFragment
 class MainActivity : AppCompatActivity(), ViewInterface {
 
     private var map: GoogleMap? = null
+    private var points: List<Point>? = null
 
     private val presenter: Presenter = MainPresenter(this)
-
-    private var points: List<Point>? = null
 
     private lateinit var coordinator: CoordinatorLayout
 
@@ -37,11 +36,12 @@ class MainActivity : AppCompatActivity(), ViewInterface {
 
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
+
         mapFragment.getMapAsync( {
             map = it
             map?.setOnMarkerClickListener { marker : Marker ->
                 val point = points?.find { it.title == marker.title } ?: return@setOnMarkerClickListener false
-                DetailsFragment.getInstance(point).show(supportFragmentManager, "mytg")
+                DetailsFragment.getInstance(point).show(supportFragmentManager, DetailsFragment.TAG)
                 return@setOnMarkerClickListener true
             }
             if (points != null) update(points!!)
